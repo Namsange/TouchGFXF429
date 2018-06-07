@@ -1,0 +1,12 @@
+Converting images
+Linking build/bin/target.elf
+Producing additional output formats...
+  target.hex   - Combined internal+external hex
+  intflash.elf - Internal flash, elf debug
+  intflash.hex - Internal flash, hex
+  extflash.bin - External flash, binary
+/usr/bin/sh: C:\Program Files (x86)\STMicroelectronics\STM32 ST-LINK Utility\ST-LINK Utility\ST-LINK_CLI.exe: No such file or directory
+target/gcc/Makefile:279: recipe for target '_extflash_' failed
+make[1]: *** [_extflash_] Error 127
+target/gcc/Makefile:45: recipe for target 'flash' failed
+make: *** [flash] Error 2
