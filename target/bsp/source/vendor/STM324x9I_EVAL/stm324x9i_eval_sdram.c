@@ -151,20 +151,20 @@ uint8_t BSP_SDRAM_Init(void)
   Timing.ExitSelfRefreshDelay = 7;
   Timing.SelfRefreshTime      = 4;
   Timing.RowCycleDelay        = 7;
-  Timing.WriteRecoveryTime    = 2;
+  Timing.WriteRecoveryTime    = 3;//2
   Timing.RPDelay              = 2;
   Timing.RCDDelay             = 2;
   
-  sdramHandle.Init.SDBank             = FMC_SDRAM_BANK1;
-  sdramHandle.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_9;
+  sdramHandle.Init.SDBank             = FMC_SDRAM_BANK2;
+  sdramHandle.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_8;
   sdramHandle.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_12;
-  sdramHandle.Init.MemoryDataWidth    = SDRAM_MEMORY_WIDTH;
+  sdramHandle.Init.MemoryDataWidth    = FMC_SDRAM_MEM_BUS_WIDTH_16;
   sdramHandle.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_4;
   sdramHandle.Init.CASLatency         = FMC_SDRAM_CAS_LATENCY_3;
   sdramHandle.Init.WriteProtection    = FMC_SDRAM_WRITE_PROTECTION_DISABLE;
-  sdramHandle.Init.SDClockPeriod      = SDCLOCK_PERIOD;
-  sdramHandle.Init.ReadBurst          = FMC_SDRAM_RBURST_ENABLE;
-  sdramHandle.Init.ReadPipeDelay      = FMC_SDRAM_RPIPE_DELAY_0;
+  sdramHandle.Init.SDClockPeriod      = FMC_SDRAM_CLOCK_PERIOD_2;
+  sdramHandle.Init.ReadBurst          = FMC_SDRAM_RBURST_DISABLE;
+  sdramHandle.Init.ReadPipeDelay      = FMC_SDRAM_RPIPE_DELAY_1;
   
   /* SDRAM controller initialization */
   SDRAM_MspInit();

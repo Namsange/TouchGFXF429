@@ -87,7 +87,7 @@ extern "C"
 }
 
 
-static uint32_t frameBuf0 = (uint32_t)(0xC0000000); //Beginning of SDRAM
+static uint32_t frameBuf0 = (uint32_t)(0xD0000000); //Beginning of SDRAM
 static void initLCD();
 static void SystemClock_Config();
 
