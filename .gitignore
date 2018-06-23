@@ -20,6 +20,7 @@ settings
 *.exp
 *.crf
 *.chai
+*.chaiz
 *.dep
 *.lst
 *.lnp

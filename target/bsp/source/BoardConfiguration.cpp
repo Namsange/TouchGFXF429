@@ -98,9 +98,10 @@ void hw_init()
 {
     HAL_Init();
     SystemClock_Config();
-    //BSP_NOR_Init();
     MX_GPIO_Init();
+    //BSP_NOR_Init();
     initLCD();
+    
     //GPIO::init();
 }
 
@@ -155,17 +156,17 @@ static void initLCD()
     LCD_LayerCfgTypeDef  Layercfg;
     LTDC_HandleTypeDef ltdc;
 
-    Layercfg.WindowX0 = 0;
-    Layercfg.WindowX1 = 800;//BSP_LCD_GetXSize();
+    Layercfg.WindowX0 = 80;
+    Layercfg.WindowX1 = 640+80;//BSP_LCD_GetXSize();
     Layercfg.WindowY0 = 0;
     Layercfg.WindowY1 = 480;//BSP_LCD_GetYSize();
     Layercfg.FBStartAdress = frameBuf0;
-    Layercfg.Alpha = 0;
-    Layercfg.Alpha0 = 255;
+    Layercfg.Alpha = 255;
+    Layercfg.Alpha0 = 0;
     Layercfg.Backcolor.Blue = 0;
     Layercfg.Backcolor.Green = 0;
     Layercfg.Backcolor.Red = 0;
-    Layercfg.ImageWidth = 800;//BSP_LCD_GetXSize();
+    Layercfg.ImageWidth = 640;//BSP_LCD_GetXSize();
     Layercfg.ImageHeight = 480;//BSP_LCD_GetYSize();
 
 #if !defined(USE_BPP) || USE_BPP==16
@@ -224,10 +225,10 @@ static void SystemClock_Config(void)
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-    RCC_OscInitStruct.PLL.PLLM = 15;
-    RCC_OscInitStruct.PLL.PLLN = 216;
+    RCC_OscInitStruct.PLL.PLLM = 25;
+    RCC_OscInitStruct.PLL.PLLN = 360;
     RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-    RCC_OscInitStruct.PLL.PLLQ = 4;
+    RCC_OscInitStruct.PLL.PLLQ = 7;
     HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
     /* Activate the Over-Drive mode */

@@ -148,93 +148,34 @@ uint8_t BSP_LCD_Init(void)
   static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
   /* Select the used LCD */
-  /* The AMPIRE 480x272 does not contain an ID register then we check the availability 
-     of AMPIRE 480x640 LCD using device ID of the STMPE811 mounted on MB1046 daughter board */ 
-  // if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
-  // {
-  //   /* The AMPIRE LCD 480x272 is selected */
-  //   /* Timing Configuration */    
-  //   hltdc_eval.Init.HorizontalSync = (AMPIRE480272_HSYNC - 1);
-  //   hltdc_eval.Init.VerticalSync = (AMPIRE480272_VSYNC - 1);
-  //   hltdc_eval.Init.AccumulatedHBP = (AMPIRE480272_HSYNC + AMPIRE480272_HBP - 1);
-  //   hltdc_eval.Init.AccumulatedVBP = (AMPIRE480272_VSYNC + AMPIRE480272_VBP - 1);  
-  //   // Note: Bugfix Draupner Graphics. In CubeF4 1.8.0, back porch settings erroneously used 640x480 values.
-  //   hltdc_eval.Init.AccumulatedActiveH = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE480272_VBP - 1);
-  //   hltdc_eval.Init.AccumulatedActiveW = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE480272_HBP - 1);
-  //   hltdc_eval.Init.TotalHeigh = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE480272_VBP + AMPIRE480272_VFP - 1);
-  //   hltdc_eval.Init.TotalWidth = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE480272_HBP + AMPIRE480272_HFP - 1);
-    
-  //   /* LCD clock configuration */
-  //   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  //   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-  //   /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
-  //   /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
-  //   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  //   PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
-  //   PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE480272_FREQUENCY_DIVIDER;
-  //   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
-  //   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
-  
-  //   /* Initialize the LCD pixel width and pixel height */
-  //   hltdc_eval.LayerCfg->ImageWidth  = AMPIRE480272_WIDTH;
-  //   hltdc_eval.LayerCfg->ImageHeight = AMPIRE480272_HEIGHT;   
-  // }
-  // else
-  // {
-  //   /* The LCD AMPIRE 640x480 is selected */
-  //   /* Timing configuration */
-  //   hltdc_eval.Init.HorizontalSync = (AMPIRE640480_HSYNC - 1);
-  //   hltdc_eval.Init.VerticalSync = (AMPIRE640480_VSYNC - 1);
-  //   hltdc_eval.Init.AccumulatedHBP = (AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
-  //   hltdc_eval.Init.AccumulatedVBP = (AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);  
-  //   hltdc_eval.Init.AccumulatedActiveH = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);
-  //   hltdc_eval.Init.AccumulatedActiveW = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
-  //   hltdc_eval.Init.TotalHeigh = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP + AMPIRE640480_VFP - 1);
-  //   hltdc_eval.Init.TotalWidth = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP + AMPIRE640480_HFP - 1); 
-    
-  //   /* LCD clock configuration */
-  //   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  //   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 143 Mhz (previously 168Mhz) */
-  //   /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 143/3 = 47,66 Mhz */
-  //   /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 47,66/2 = 23,83 Mhz (Previously 28,5Mhz) */ 
-                      
-  //   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  //   PeriphClkInitStruct.PLLSAI.PLLSAIN = 143;
-  //   PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE640480_FREQUENCY_DIVIDER;
-  //   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
-  //   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
-    
-  //   /* Initialize the LCD pixel width and pixel height */
-  //   hltdc_eval.LayerCfg->ImageWidth  = AMPIRE640480_WIDTH;
-  //   hltdc_eval.LayerCfg->ImageHeight = AMPIRE640480_HEIGHT;
-  //  }
+  /* The AMPIRE 480x272 does not contain an ID register then we check the availability of AMPIRE 480x640 LCD using device ID of the STMPE811 mounted on MB1046 daughter board */ 
 
-    /* The AMPIRE LCD 480x272 is selected */
-    /* Timing Configuration */    
-    hltdc_eval.Init.HorizontalSync = 0;
-    hltdc_eval.Init.VerticalSync = 0;
-    hltdc_eval.Init.AccumulatedHBP = 46;
-    hltdc_eval.Init.AccumulatedVBP = 23;  
-    // Note: Bugfix Draupner Graphics. In CubeF4 1.8.0, back porch settings erroneously used 640x480 values.
-    hltdc_eval.Init.AccumulatedActiveH = 503;
-    hltdc_eval.Init.AccumulatedActiveW = 846;
-    hltdc_eval.Init.TotalHeigh = 525;
-    hltdc_eval.Init.TotalWidth = 866;
-    
-    /* LCD clock configuration */
-    /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-    /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-    /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
-    PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE480272_FREQUENCY_DIVIDER;
-    PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
-    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
+  /* The AMPIRE LCD 480x272 is selected */
+  /* Timing Configuration */    
+  hltdc_eval.Init.HorizontalSync = 0;
+  hltdc_eval.Init.VerticalSync = 0;
+  hltdc_eval.Init.AccumulatedHBP = 46;
+  hltdc_eval.Init.AccumulatedVBP = 23;  
+  // Note: Bugfix Draupner Graphics. In CubeF4 1.8.0, back porch settings erroneously used 640x480 values.
+  hltdc_eval.Init.AccumulatedActiveH = 503;
+  hltdc_eval.Init.AccumulatedActiveW = 846;
+  hltdc_eval.Init.TotalHeigh = 525;
+  hltdc_eval.Init.TotalWidth = 866;
   
-    /* Initialize the LCD pixel width and pixel height */
-    hltdc_eval.LayerCfg->ImageWidth  = 800;
-    hltdc_eval.LayerCfg->ImageHeight = 480;   
+  /* LCD clock configuration */
+  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
+  PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE480272_FREQUENCY_DIVIDER;
+  PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
+
+  /* Initialize the LCD pixel width and pixel height */
+  hltdc_eval.LayerCfg->ImageWidth  = 640;
+  hltdc_eval.LayerCfg->ImageHeight = 480;   
 
   /* Background value */
   hltdc_eval.Init.Backcolor.Blue = 0;
@@ -423,37 +364,7 @@ static void MspInit(void)
   /* USER CODE END LTDC_MspInit 0 */
     /* LTDC clock enable */
     __HAL_RCC_LTDC_CLK_ENABLE();
-  
-    /**LTDC GPIO Configuration    
-    PE4     ------> LTDC_B0
-    PE5     ------> LTDC_G0
-    PE6     ------> LTDC_G1
-    PI9     ------> LTDC_VSYNC
-    PI10     ------> LTDC_HSYNC
-    PF10     ------> LTDC_DE
-    PH2     ------> LTDC_R0
-    PH3     ------> LTDC_R1
-    PA3     ------> LTDC_B5
-    PB0     ------> LTDC_R3
-    PB1     ------> LTDC_R6
-    PH8     ------> LTDC_R2
-    PG6     ------> LTDC_R7
-    PG7     ------> LTDC_CLK
-    PC7     ------> LTDC_G6
-    PA11     ------> LTDC_R4
-    PA12     ------> LTDC_R5
-    PH13     ------> LTDC_G2
-    PH15     ------> LTDC_G4
-    PI0     ------> LTDC_G5
-    PI2     ------> LTDC_G7
-    PD6     ------> LTDC_B2
-    PG10     ------> LTDC_G3
-    PG11     ------> LTDC_B3
-    PG12     ------> LTDC_B1
-    PB8     ------> LTDC_B6
-    PB9     ------> LTDC_B7
-    PI4     ------> LTDC_B4 
-    */
+	
     GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
