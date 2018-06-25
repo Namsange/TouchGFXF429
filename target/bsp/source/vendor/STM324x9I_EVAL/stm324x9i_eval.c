@@ -543,7 +543,7 @@ static void I2Cx_Init(void)
 {
   if(HAL_I2C_GetState(&heval_I2c) == HAL_I2C_STATE_RESET)
   {
-    heval_I2c.Instance = I2C1;
+    heval_I2c.Instance = I2C2;
     heval_I2c.Init.ClockSpeed      = BSP_I2C_SPEED;
     heval_I2c.Init.DutyCycle       = I2C_DUTYCYCLE_2;
     heval_I2c.Init.OwnAddress1     = 0;
