@@ -504,16 +504,16 @@ static void I2Cx_MspInit(void)
   EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
   
   /* Configure I2C Tx as alternate function */
-  GPIO_InitStruct.Pin = EVAL_I2Cx_SCL_PIN;
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
-  GPIO_InitStruct.Alternate = EVAL_I2Cx_SCL_SDA_AF;
-  HAL_GPIO_Init(EVAL_I2Cx_SCL_SDA_GPIO_PORT, &GPIO_InitStruct);
+  GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
   
   /* Configure I2C Rx as alternate function */
-  GPIO_InitStruct.Pin = EVAL_I2Cx_SDA_PIN;
-  HAL_GPIO_Init(EVAL_I2Cx_SCL_SDA_GPIO_PORT, &GPIO_InitStruct);
+  // GPIO_InitStruct.Pin = EVAL_I2Cx_SDA_PIN;
+  // HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
   
   /*** Configure the I2C peripheral ***/ 
   /* Enable I2C clock */

@@ -308,8 +308,8 @@ typedef enum
 #define EVAL_I2Cx_SDA_PIN                     GPIO_PIN_9
 
 /* I2C interrupt requests */
-#define EVAL_I2Cx_EV_IRQn                     I2C1_EV_IRQn
-#define EVAL_I2Cx_ER_IRQn                     I2C1_ER_IRQn
+#define EVAL_I2Cx_EV_IRQn                     I2C2_EV_IRQn
+#define EVAL_I2Cx_ER_IRQn                     I2C2_ER_IRQn
 
 /**
   * @}
