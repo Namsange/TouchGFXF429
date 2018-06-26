@@ -149,11 +149,11 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
   ts_y_boundary = ySize;
   
   /* Read ID and verify if the IO expander is ready */
-  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID) 
+  if(GT9157_ts_drv.ReadID(GTP_ADDRESS) == GT9157_ID)
   { 
     /* Initialize the TS driver structure */
-    ts_driver = &stmpe811_ts_drv;  
-    I2C_Address = TS_I2C_ADDRESS;
+    ts_driver = &GT9157_ts_drv;  
+    I2C_Address = GTP_ADDRESS;
     ts_orientation = TS_SWAP_Y;
   }
   else

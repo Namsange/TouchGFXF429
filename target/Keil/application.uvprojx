@@ -776,6 +776,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\Bsp.c</FilePath>
             </File>
+            <File>
+              <FileName>GT9157.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\bsp\source\vendor\Components\GT9157\GT9157.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

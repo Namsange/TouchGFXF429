@@ -144,7 +144,9 @@ static void     I2Cx_MspInit(void);
 static void     I2Cx_Init(void);
 static void     I2Cx_ITConfig(void);
 static void     I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+static void     I2Cx16_Write(uint8_t Addr, uint16_t Reg, uint8_t* Value ,uint16_t Size);
 static uint8_t  I2Cx_Read(uint8_t Addr, uint8_t Reg);
+static void     I2Cx16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value ,uint16_t Size);
 static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length);
 static HAL_StatusTypeDef I2Cx_WriteMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddSize, uint8_t *Buffer, uint16_t Length);
 static HAL_StatusTypeDef I2Cx_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
@@ -155,7 +157,9 @@ void            IOE_Init(void);
 void            IOE_ITConfig(void);
 void            IOE_Delay(uint32_t Delay);
 void            IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+void            IOE16_Write(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size);
 uint8_t         IOE_Read(uint8_t Addr, uint8_t Reg);
+void            IOE16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size);
 uint16_t        IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
 void            IOE_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
 
@@ -507,7 +511,7 @@ static void I2Cx_MspInit(void)
   GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF4_I2C2;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
   
@@ -546,7 +550,7 @@ static void I2Cx_Init(void)
     heval_I2c.Instance = I2C2;
     heval_I2c.Init.ClockSpeed      = BSP_I2C_SPEED;
     heval_I2c.Init.DutyCycle       = I2C_DUTYCYCLE_2;
-    heval_I2c.Init.OwnAddress1     = 0;
+    heval_I2c.Init.OwnAddress1     = 0x0a;
     heval_I2c.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
     heval_I2c.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
     heval_I2c.Init.OwnAddress2     = 0;
@@ -587,7 +591,27 @@ static void I2Cx_ITConfig(void)
     HAL_NVIC_EnableIRQ((IRQn_Type)(EXTI9_5_IRQn));
   }
 }
-
+static void I2CxGT9157_ITConfig(void)
+{
+  static uint8_t I2CGT_IT_Enabled = 0;
+  GPIO_InitTypeDef GPIO_InitStruct;
+  if(I2CGT_IT_Enabled == 0)
+  {
+    I2CGT_IT_Enabled = 1;
+    /*Configure GPIO pin : PtPin */
+    __GPIOI_CLK_ENABLE();
+    __SYSCFG_CLK_ENABLE();
+    GPIO_InitStruct.Pin = GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init (GPIOD, &GPIO_InitStruct);
+    /* 配置中断优先级 */
+    // NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    /*使能中断*/
+    HAL_NVIC_SetPriority (EXTI15_10_IRQn, 0x0F, 0x0F);
+    HAL_NVIC_EnableIRQ (EXTI15_10_IRQn);
+  }
+}
 /**
   * @brief  Writes a single data.
   * @param  Addr: I2C address
@@ -609,6 +633,19 @@ static void I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
   }
 }
 
+static void I2Cx16_Write(uint8_t Addr, uint16_t Reg, uint8_t* Value ,uint16_t Size)
+{
+  HAL_StatusTypeDef status = HAL_OK;
+
+  status = HAL_I2C_Mem_Write(&heval_I2c, Addr, Reg, I2C_MEMADD_SIZE_8BIT, Value, Size, 100); 
+
+  /* Check the communication status */
+  if(status != HAL_OK)
+  {
+    /* Execute user timeout callback */
+    I2Cx_Error(Addr);
+  }
+}
 /**
   * @brief  Reads a single data.
   * @param  Addr: I2C address
@@ -630,7 +667,19 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
   }
   return Value;   
 }
-
+static void I2Cx16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value ,uint16_t Size)
+{
+  HAL_StatusTypeDef status = HAL_OK;
+  
+  status = HAL_I2C_Mem_Read(&heval_I2c, Addr, Reg, I2C_MEMADD_SIZE_16BIT, Value, Size, 1000);
+  
+  /* Check the communication status */
+  if(status != HAL_OK)
+  {
+    /* Execute user timeout callback */
+    I2Cx_Error(Addr);
+  }  
+}
 /**
   * @brief  Reads multiple data.
   * @param  Addr: I2C address
@@ -738,7 +787,10 @@ void IOE_ITConfig(void)
 {
   I2Cx_ITConfig();
 }
-
+void IOE_ITGT9157Config(void)
+{
+  I2CxGT9157_ITConfig();
+}
 /**
   * @brief  IOE writes single data.
   * @param  Addr: I2C address
@@ -750,7 +802,10 @@ void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
   I2Cx_Write(Addr, Reg, Value);
 }
-
+void IOE16_Write(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size)
+{
+  I2Cx16_Write(Addr, Reg, Value, Size);
+}
 /**
   * @brief  IOE reads single data.
   * @param  Addr: I2C address
@@ -761,7 +816,10 @@ uint8_t IOE_Read(uint8_t Addr, uint8_t Reg)
 {
   return I2Cx_Read(Addr, Reg);
 }
-
+void IOE16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size)
+{
+  I2Cx16_Read(Addr, Reg, Value, Size);
+}
 /**
   * @brief  IOE reads multiple data.
   * @param  Addr: I2C address

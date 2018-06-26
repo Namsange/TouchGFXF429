@@ -281,25 +281,26 @@ typedef enum
 #define CAMERA_I2C_ADDRESS               0x60
 #define AUDIO_I2C_ADDRESS                0x34
 #define EEPROM_I2C_ADDRESS_A01           0xA0
-#define EEPROM_I2C_ADDRESS_A02           0xA6  
+#define EEPROM_I2C_ADDRESS_A02           0xA6
+#define GTP_ADDRESS                      0xBA
 /* I2C clock speed configuration (in Hz) 
    WARNING: 
    Make sure that this define is not already declared in other files (ie. 
    stm324x9I_eval.h file). It can be used in parallel by other modules. */
 #ifndef BSP_I2C_SPEED
- #define BSP_I2C_SPEED                        100000
+ #define BSP_I2C_SPEED                        400000 //
 #endif /* BSP_I2C_SPEED */
 
 /* User can use this section to tailor I2Cx/I2Cx instance used and associated 
    resources */
 /* Definition for I2Cx clock resources */
 #define EVAL_I2Cx                             I2C1
-#define EVAL_I2Cx_CLK_ENABLE()                __I2C1_CLK_ENABLE()
+#define EVAL_I2Cx_CLK_ENABLE()                __I2C2_CLK_ENABLE()
 #define EVAL_DMAx_CLK_ENABLE()                __DMA1_CLK_ENABLE()
-#define EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE()   __GPIOB_CLK_ENABLE()
+#define EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE()   __GPIOH_CLK_ENABLE()
 
-#define EVAL_I2Cx_FORCE_RESET()               __I2C1_FORCE_RESET()
-#define EVAL_I2Cx_RELEASE_RESET()             __I2C1_RELEASE_RESET()
+#define EVAL_I2Cx_FORCE_RESET()               __I2C2_FORCE_RESET()
+#define EVAL_I2Cx_RELEASE_RESET()             __I2C2_RELEASE_RESET()
    
 /* Definition for I2Cx Pins */
 #define EVAL_I2Cx_SCL_PIN                     GPIO_PIN_6
