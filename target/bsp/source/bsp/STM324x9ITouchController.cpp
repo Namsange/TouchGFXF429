@@ -44,10 +44,11 @@ using namespace touchgfx;
 
 void STM324x9ITouchController::init()
 {
-    if (BSP_TS_Init(800, 480) == TS_OK)
-    {
-        isInitialized = true;
-    }
+    //if (BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize()) == TS_OK)
+    //{
+    //    isInitialized = true;
+    //}
+	isInitialized = true;
 }
 
 bool STM324x9ITouchController::sampleTouch(int32_t& x, int32_t& y)
@@ -55,8 +56,8 @@ bool STM324x9ITouchController::sampleTouch(int32_t& x, int32_t& y)
     if (isInitialized)
     {
         TS_StateTypeDef state;
-        BSP_TS_GetState(&state);
-        if (state.TouchDetected)
+        //BSP_TS_GetState(&state);
+        //if (state.TouchDetected)
         {
             x = state.x;
             y = state.y;

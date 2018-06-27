@@ -18,7 +18,7 @@
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.13.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000,0x30000) IRAM2(0x10000000,0x10000) IROM(0x08000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x00030000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024 -FS08000000 -FL0100000 -FP0($$Device:STM32F429IGTx$CMSIS\Flash\STM32F4xx_1024.FLM))</FlashDriverDll>
@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4096</DriverSelection>
+            <DriverSelection>4105</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -637,29 +637,19 @@
               <FilePath>../../gui/src/common/frontendapplication.cpp</FilePath>
             </File>
             <File>
+              <FileName>mainPresenter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../../gui/src/main_screen/mainpresenter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>mainView.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../../gui/src/main_screen/mainview.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Model.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../gui/src/model/model.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen1Presenter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen1_screen/screen1presenter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen1View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen1_screen/screen1view.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2Presenter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen2_screen/screen2presenter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen2_screen/screen2view.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -672,34 +662,39 @@
               <FilePath>../../generated/fonts/src/applicationfontprovider.cpp</FilePath>
             </File>
             <File>
+              <FileName>background.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../../generated/images/src/background.cpp</FilePath>
+            </File>
+            <File>
               <FileName>BitmapDatabase.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../generated/images/src/bitmapdatabase.cpp</FilePath>
             </File>
             <File>
-              <FileName>blue_buttons_round_edge_small.cpp</FileName>
+              <FileName>clock_00_background.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/images/src/__designer/blue_buttons_round_edge_small.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_background.cpp</FilePath>
             </File>
             <File>
-              <FileName>blue_buttons_round_edge_small_pressed.cpp</FileName>
+              <FileName>clock_00_hour_hand.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/images/src/__designer/blue_buttons_round_edge_small_pressed.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_hour_hand.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_verdana_10_4bpp.cpp</FileName>
+              <FileName>clock_00_minute_hand.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_10_4bpp.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_minute_hand.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_verdana_20_4bpp.cpp</FileName>
+              <FileName>clock_00_second_hand.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_20_4bpp.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_second_hand.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_verdana_40_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_24_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_40_4bpp.cpp</FilePath>
+              <FilePath>../../generated/fonts/src/font_asap_regular_24_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>FontGetters.cpp</FileName>
@@ -712,19 +707,9 @@
               <FilePath>../../generated/gui_generated/src/common/frontendapplicationbase.cpp</FilePath>
             </File>
             <File>
-              <FileName>Kerning_verdana_10_4bpp.cpp</FileName>
+              <FileName>Kerning_Asap_Regular_24_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_40_4bpp.cpp</FilePath>
+              <FilePath>../../generated/fonts/src/kerning_asap_regular_24_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>LanguageGb.cpp</FileName>
@@ -732,29 +717,14 @@
               <FilePath>../../generated/texts/src/languagegb.cpp</FilePath>
             </File>
             <File>
-              <FileName>Screen1ViewBase.cpp</FileName>
+              <FileName>mainViewBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/gui_generated/src/screen1_screen/screen1viewbase.cpp</FilePath>
+              <FilePath>../../generated/gui_generated/src/main_screen/mainviewbase.cpp</FilePath>
             </File>
             <File>
-              <FileName>Screen2ViewBase.cpp</FileName>
+              <FileName>Table_Asap_Regular_24_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/gui_generated/src/screen2_screen/screen2viewbase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_10_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_40_4bpp.cpp</FilePath>
+              <FilePath>../../generated/fonts/src/table_asap_regular_24_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Texts.cpp</FileName>
@@ -776,11 +746,6 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\Bsp.c</FilePath>
             </File>
-            <File>
-              <FileName>GT9157.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\bsp\source\vendor\Components\GT9157\GT9157.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -793,8 +758,8 @@
   <RTE>
     <apis/>
     <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.2" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.1.0"/>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.1.1" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.3.0"/>
         <targetInfos>
           <targetInfo name="Internal flash and NOR"/>
         </targetInfos>

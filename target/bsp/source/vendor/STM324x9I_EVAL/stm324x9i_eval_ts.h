@@ -48,7 +48,6 @@
 #include "stm324x9i_eval.h"
 /* Include IOExpander(STMPE811) component Driver */ 
 #include "../Components/stmpe811/stmpe811.h"
-#include "../Components/GT9157/GT9157.h"
 /* Include TouchScreen component drivers */
 #include "../Components/ts3510/ts3510.h"
 #include "../Components/exc7200/exc7200.h"   

@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_proj.xsd">
-
   <SchemaVersion>1.1</SchemaVersion>
-
   <Header>### uVision Project, (C) Keil Software</Header>
-
   <Targets>
     <Target>
       <TargetName>Internal flash and NOR</TargetName>
@@ -30,6 +27,7 @@
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>SFD\ST\STM32F4xx\STM32F439x.SFR</SFDFile>
+          <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -97,6 +95,7 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument></CustomArgument>
           <IncludeLibraryModules></IncludeLibraryModules>
+          <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -126,20 +125,23 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
+            <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
             <RestoreWatchpoints>1</RestoreWatchpoints>
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>-1</TargetSelection>
+          <TargetSelection>11</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -169,6 +171,10 @@
           <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
+          <pFcarmOut></pFcarmOut>
+          <pFcarmGrp></pFcarmGrp>
+          <pFcArmRoot></pFcArmRoot>
+          <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -347,6 +353,8 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>ST STM32F429xx USE_OS_SYSTICK USE_BPP=16</Define>
@@ -363,6 +371,7 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -379,6 +388,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
+            <pXoBase></pXoBase>
             <ScatterFile>.\Flash.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -648,29 +658,19 @@
               <FilePath>../../gui/src/common/frontendapplication.cpp</FilePath>
             </File>
             <File>
+              <FileName>mainPresenter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../../gui/src/main_screen/mainpresenter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>mainView.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../../gui/src/main_screen/mainview.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Model.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../gui/src/model/model.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen1Presenter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen1_screen/screen1presenter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen1View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen1_screen/screen1view.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2Presenter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen2_screen/screen2presenter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen2_screen/screen2view.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -683,34 +683,39 @@
               <FilePath>../../generated/fonts/src/applicationfontprovider.cpp</FilePath>
             </File>
             <File>
+              <FileName>background.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../../generated/images/src/background.cpp</FilePath>
+            </File>
+            <File>
               <FileName>BitmapDatabase.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../generated/images/src/bitmapdatabase.cpp</FilePath>
             </File>
             <File>
-              <FileName>blue_buttons_round_edge_small.cpp</FileName>
+              <FileName>clock_00_background.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/images/src/__designer/blue_buttons_round_edge_small.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_background.cpp</FilePath>
             </File>
             <File>
-              <FileName>blue_buttons_round_edge_small_pressed.cpp</FileName>
+              <FileName>clock_00_hour_hand.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/images/src/__designer/blue_buttons_round_edge_small_pressed.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_hour_hand.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_verdana_10_4bpp.cpp</FileName>
+              <FileName>clock_00_minute_hand.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_10_4bpp.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_minute_hand.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_verdana_20_4bpp.cpp</FileName>
+              <FileName>clock_00_second_hand.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_20_4bpp.cpp</FilePath>
+              <FilePath>../../generated/images/src/clock_00_second_hand.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_verdana_40_4bpp.cpp</FileName>
+              <FileName>Font_Asap_Regular_24_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_40_4bpp.cpp</FilePath>
+              <FilePath>../../generated/fonts/src/font_asap_regular_24_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>FontGetters.cpp</FileName>
@@ -723,19 +728,9 @@
               <FilePath>../../generated/gui_generated/src/common/frontendapplicationbase.cpp</FilePath>
             </File>
             <File>
-              <FileName>Kerning_verdana_10_4bpp.cpp</FileName>
+              <FileName>Kerning_Asap_Regular_24_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_40_4bpp.cpp</FilePath>
+              <FilePath>../../generated/fonts/src/kerning_asap_regular_24_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>LanguageGb.cpp</FileName>
@@ -743,29 +738,14 @@
               <FilePath>../../generated/texts/src/languagegb.cpp</FilePath>
             </File>
             <File>
-              <FileName>Screen1ViewBase.cpp</FileName>
+              <FileName>mainViewBase.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/gui_generated/src/screen1_screen/screen1viewbase.cpp</FilePath>
+              <FilePath>../../generated/gui_generated/src/main_screen/mainviewbase.cpp</FilePath>
             </File>
             <File>
-              <FileName>Screen2ViewBase.cpp</FileName>
+              <FileName>Table_Asap_Regular_24_4bpp.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../generated/gui_generated/src/screen2_screen/screen2viewbase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_10_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_40_4bpp.cpp</FilePath>
+              <FilePath>../../generated/fonts/src/table_asap_regular_24_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Texts.cpp</FileName>
@@ -782,5 +762,4 @@
       </Groups>
     </Target>
   </Targets>
-
 </Project>

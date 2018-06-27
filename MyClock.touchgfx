@@ -1,0 +1,89 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Components": [
+          {
+            "FileName": "background.png",
+            "Alpha": 255,
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "background",
+            "X": 0,
+            "Y": 0,
+            "Width": 640,
+            "Height": 480,
+            "Type": "TiledImage",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "main"
+      }
+    ],
+    "CustomContainerDefinitions": [],
+    "TextEntries": [
+      {
+        "TextEntryId": "Digital_clock",
+        "IsResource": true
+      }
+    ],
+    "Name": "MyClock",
+    "Resolution": {
+      "Width": 640,
+      "Height": 480
+    },
+    "SelectedColorDepth": 16,
+    "StartupScreenName": "main",
+    "SelectedStartupLanguage": "GB",
+    "Skin": "Blue",
+    "TouchGfxPath": "touchgfx",
+    "UIPath": ".",
+    "ApplicationTemplate": {
+      "Name": "ST_STM324x9I_CUBE",
+      "Version": "1.0.0",
+      "Description": "ST STM324x9I CUBE Application Template",
+      "AvailableColorDepths": [
+        16
+      ],
+      "AvailableImageFormats": {
+        "16": {
+          "Opaque": "RGB565",
+          "NonOpaque": "ARGB8888"
+        },
+        "24": {
+          "Opaque": "RGB888",
+          "NonOpaque": "ARGB8888"
+        }
+      },
+      "AvailableResolutions": [
+        {
+          "Width": 480,
+          "Height": 272
+        },
+        {
+          "Width": 640,
+          "Height": 480
+        }
+      ],
+      "PhysicalButtons": [
+        {
+          "Key": 1,
+          "Name": "User Key"
+        }
+      ],
+      "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j10",
+      "PostGenerateCommand": "touchgfx update_project --project-file=target/IAR/application.ewp && touchgfx update_project --project-file=target/IAR8.x/application.ewp && touchgfx update_project --project-file=target/Keil/application.uvproj && touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+      "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j10",
+      "RunSimulatorCommand": "build\\bin\\simulator.exe",
+      "CompileTargetCommand": "make -f target/gcc/Makefile -j10",
+      "FlashTargetCommand": "make -f target/gcc/Makefile -j10 flash"
+    }
+  },
+  "Version": "4.9.3",
+  "CreatedBy": "4.9.3"
+}
