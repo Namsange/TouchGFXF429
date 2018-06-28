@@ -11,7 +11,7 @@ uint8_t GT9157[GTP_MAX_TOUCH] = {0};
 uint8_t config[GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH]
     = {GTP_REG_CONFIG_DATA >> 8, GTP_REG_CONFIG_DATA & 0xff};
 uint8_t  end_cmd[3] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF, 0};
-static uint8_t GT9157_GetInstance (uint16_t DeviceAddr);
+// static uint8_t GT9157_GetInstance (uint16_t DeviceAddr);
 static void GTP_I2C_Write (uint8_t DeviceAddr, uint8_t * buf, int32_t len);
 static void GTP_I2C_Read (uint8_t DeviceAddr, uint8_t * buf, int32_t len);
 // static void GT9157_DisableGlobalIT (void);
@@ -53,37 +53,24 @@ TS_DrvTypeDef GT9157_ts_drv = {
 
 void GT9157_Init (uint16_t DeviceAddr)
 {
-    uint8_t instance;
-    uint8_t empty;
-	uint8_t i;
+    //uint8_t instance;
+    //uint8_t empty;
+	uint32_t i;
     uint8_t * cfg_info;
     uint8_t cfg_info_len;
     uint8_t check_sum = 0;
     uint8_t cfg_num = 0x80FE - 0x8047 + 1 ;
-    /* Check if device instance already exists */
-    instance = GT9157_GetInstance (DeviceAddr);
 
-    /* To prevent double initialization */
-    if (instance == 0xFF) {
-        /* Look for empty instance */
-        empty = GT9157_GetInstance (0);
-
-        if (empty < GTP_MAX_TOUCH) {
-            /* Register the current device instance */
-            GT9157[empty] = DeviceAddr;
-            /* Initialize IO BUS layer */
-            IOE_Init();
-            /* Generate GT9157 Software reset */
-            GT9157_Reset (DeviceAddr);
-        }
-    }
+    IOE_Init();//配置GPIO口和i2c的属性
+    BSP_GT9157_IO_Reset();//复位INT与RESET管脚，选中器械地址为0xBA
+    IOE_ITGT9157Config();//使能INT中断口
 
     cfg_info =  CTP_CFG_GT9157;                     //指向寄存器配置
     cfg_info_len = CFG_GROUP_LEN (CTP_CFG_GT9157);  //计算配置表的大小
     memset (&config[GTP_ADDR_LENGTH], 0, GTP_CONFIG_MAX_LENGTH);
     memcpy (&config[GTP_ADDR_LENGTH], cfg_info, cfg_info_len);
-    check_sum = 0;
 
+    check_sum = 0;
     for (i = GTP_ADDR_LENGTH; i < cfg_num + GTP_ADDR_LENGTH; i++) {
         check_sum += config[i];
     }
@@ -97,36 +84,14 @@ void GT9157_Init (uint16_t DeviceAddr)
 }
 void GT9157_Reset(uint16_t DeviceAddr)
 {
-    GPIO_InitTypeDef GPIO_InitStruct;
-    /*配置 INT引脚，下拉推挽输出，方便初始化 */
-    GPIO_InitStruct.Pin = CTP_INT_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Pull  = GPIO_PULLDOWN;       //设置为下拉，方便初始化
-    HAL_GPIO_Init (GPIOD, &GPIO_InitStruct);
-    /*初始化GT9157,rst为高电平，int为低电平，则gt9157的设备地址被配置为0xBA*/
-    /*复位为低电平，为初始化做准备*/
-    HAL_GPIO_WritePin (GPIOD, CTP_RST_Pin, GPIO_PIN_RESET);
-    // GPIOD->BSRRH = CTP_RST_Pin;
-    HAL_Delay(2);
-    /*拉高一段时间，进行初始化*/
-    HAL_GPIO_WritePin (GPIOD, CTP_RST_Pin, GPIO_PIN_SET);
-    // GPIOD->BSRRL = CTP_RST_Pin;
-    HAL_Delay(2);
-    /*把INT引脚设置为浮空输入模式，以便接收触摸中断信号*/
-    GPIO_InitStruct.Pin = CTP_INT_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Pull  = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    BSP_GT9157_IO_Reset();
 }
 uint16_t GT9157_ReadID (uint16_t DeviceAddr)
 {
     uint16_t touchIC = 0;
     uint8_t buf[8] = {GTP_REG_VERSION >> 8, GTP_REG_VERSION & 0xff};    //寄存器地址
-    GT9157_Init (DeviceAddr);
-    HAL_Delay(2);
-    GTP_I2C_Read (DeviceAddr, buf, sizeof (buf));
+
+    GTP_I2C_Read (DeviceAddr, buf, 8);
 
     if (buf[5] == 0x00) {
         //GT911芯片
@@ -146,17 +111,15 @@ uint16_t GT9157_ReadID (uint16_t DeviceAddr)
 }
 uint8_t GT9157_TS_DetectTouch (uint16_t DeviceAddr)
 {
-    uint8_t ret = 0;
-    uint8_t  finger = 0;
-    uint8_t  point_data[8];
-	point_data[0] = 0x81;
-	point_data[1] = 0x4e;
-    GTP_I2C_Read (DeviceAddr, point_data, 8);
-    finger = point_data[2];//状态寄存器数据
+    uint8_t ret = 1;
+    // uint8_t  finger = 0;
+    // uint8_t  point_data[11] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xff}; 
+    // //GTP_I2C_Read (DeviceAddr, point_data, 11);
 
-    if (finger != 0x00) {	//没有数据，退出
-        ret = 1;
-    }
+    // finger = point_data[2];//状态寄存器数据
+    // if (finger == 0x00) {	//没有数据，退出
+    //     ret = 0;
+    // }
 
     return ret;
 }
@@ -174,32 +137,22 @@ void GT9157_TS_GetXY (uint16_t DeviceAddr, uint16_t * X, uint16_t * Y)
     uint32_t uldataXYZ;
 	uint8_t finger;
 	uint8_t touch_num;
-    uint8_t  point_data[1 + 8 * GTP_MAX_TOUCH] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF};
-    GTP_I2C_Read (DeviceAddr, point_data, 3); //10字节寄存器加2字节地址
+    uint8_t  point_data[2 + 1 + 8 * GTP_MAX_TOUCH] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF};
+    GTP_I2C_Read (DeviceAddr, point_data, 11); //10字节寄存器加2字节地址
     finger = point_data[GTP_ADDR_LENGTH];//状态寄存器数据
 
     if (finger == 0x00) {	//没有数据，退出
         return;
     }
-
     if ((finger & 0x80) == 0) { //判断buffer status位
         goto exit_work_func;//坐标未就绪，数据无效
     }
-
     touch_num = finger & 0x0f;//坐标点数
-
     if (touch_num > GTP_MAX_TOUCH) {
         goto exit_work_func;//大于最大支持点数，错误退出
     }
 
-    if (touch_num > 1) { //不止一个点
-        uint8_t buf[8 * GTP_MAX_TOUCH] = { (GTP_READ_COOR_ADDR + 1) >> 8, (GTP_READ_COOR_ADDR + 1) & 0xff};
-        GTP_I2C_Read (DeviceAddr, buf,  8 * touch_num);
-        memcpy (&point_data[0], &buf[2], 8 * (touch_num - 1));
-    }
-
-    /* Calculate positions values */
-    uldataXYZ = (point_data[2] << 24) | (point_data[1] << 16) | (point_data[4] << 8) | (point_data[3] << 0);
+    uldataXYZ = (point_data[5] << 24) | (point_data[4] << 16) | (point_data[7] << 8) | (point_data[6] << 0);
     *X = (uldataXYZ >> 16) & 0x0000FFFF;
     *Y = (uldataXYZ) & 0x0000FFFF;
 exit_work_func: {
@@ -224,19 +177,19 @@ uint8_t GT9157_TS_ITStatus (uint16_t DeviceAddr)
     //   return(stmpe811_ReadGITStatus(DeviceAddr, STMPE811_TS_IT));
 	return 0;
 }
-static uint8_t GT9157_GetInstance (uint16_t DeviceAddr)
-{
-    uint8_t idx = 0;
+// static uint8_t GT9157_GetInstance (uint16_t DeviceAddr)
+// {
+//     uint8_t idx = 0;
 
-    /* Check all the registered instances */
-    for (idx = 0; idx < GTP_MAX_TOUCH ; idx ++) {
-        if (GT9157[idx] == DeviceAddr) {
-            return idx;
-        }
-    }
+//     /* Check all the registered instances */
+//     for (idx = 0; idx < GTP_MAX_TOUCH ; idx ++) {
+//         if (GT9157[idx] == DeviceAddr) {
+//             return idx;
+//         }
+//     }
 
-    return 0xFF;
-}
+//     return 0xFF;
+// }
 static void GTP_I2C_Write (uint8_t DeviceAddr, uint8_t * buf, int32_t len)
 {
     uint16_t MemAddress;
@@ -249,7 +202,7 @@ static void GTP_I2C_Read (uint8_t DeviceAddr, uint8_t * buf, int32_t len)
     uint16_t MemAddress;
     // GTP_DEBUG_FUNC();
     MemAddress = ((uint16_t)buf[0]) << 8 | buf[1];
-    IOE16_Read(DeviceAddr, MemAddress, &buf[2], len - 2);
+    IOE16_Read(DeviceAddr, MemAddress, &buf[2], len - GTP_ADDR_LENGTH);
 }
 // static void GT9157_EnableGlobalIT ()
 // {

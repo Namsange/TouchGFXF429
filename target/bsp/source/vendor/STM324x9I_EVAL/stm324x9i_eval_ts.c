@@ -149,6 +149,8 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
   ts_y_boundary = ySize;
   
   /* Read ID and verify if the IO expander is ready */
+  GT9157_ts_drv.Init(GTP_ADDRESS);
+  
   if(GT9157_ts_drv.ReadID(GTP_ADDRESS) == GT9157_ID)
   { 
     /* Initialize the TS driver structure */
@@ -158,27 +160,28 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
   }
   else
   {
-    IOE_Init();
+    // IOE_Init();
     
-    /* Check TS3510 touch screen driver presence to determine if TS3510 or
-     * EXC7200 driver will be used */
-    if(BSP_TS3510_IsDetected() == 0)
-    {
-      /* Initialize the TS driver structure */
-      ts_driver = &ts3510_ts_drv; 
-      I2C_Address = TS3510_I2C_ADDRESS;
-    }
-    else    
-    {
-      /* Initialize the TS driver structure */
-      ts_driver = &exc7200_ts_drv; 
-      I2C_Address = EXC7200_I2C_ADDRESS;
-    }
-    ts_orientation = TS_SWAP_NONE;
+    // /* Check TS3510 touch screen driver presence to determine if TS3510 or
+    //  * EXC7200 driver will be used */
+    // if(BSP_TS3510_IsDetected() == 0)
+    // {
+    //   /* Initialize the TS driver structure */
+    //   ts_driver = &ts3510_ts_drv; 
+    //   I2C_Address = TS3510_I2C_ADDRESS;
+    // }
+    // else    
+    // {
+    //   /* Initialize the TS driver structure */
+    //   ts_driver = &exc7200_ts_drv; 
+    //   I2C_Address = EXC7200_I2C_ADDRESS;
+    // }
+    // ts_orientation = TS_SWAP_NONE;
+    status = TS_ERROR;
   }
   
   /* Initialize the TS driver */
-  ts_driver->Init(I2C_Address);
+  // ts_driver->Init(I2C_Address);
   ts_driver->Start(I2C_Address);
   
   return status;

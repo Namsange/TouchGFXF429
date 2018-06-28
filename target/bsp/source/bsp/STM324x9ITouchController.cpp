@@ -44,7 +44,7 @@ using namespace touchgfx;
 
 void STM324x9ITouchController::init()
 {
-    if (BSP_TS_Init(800, 480) == TS_OK)
+    if (BSP_TS_Init(640, 400) == TS_OK)
     {
         isInitialized = true;
     }

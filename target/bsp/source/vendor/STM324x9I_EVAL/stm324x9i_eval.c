@@ -162,7 +162,7 @@ uint8_t         IOE_Read(uint8_t Addr, uint8_t Reg);
 void            IOE16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size);
 uint16_t        IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
 void            IOE_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
-
+uint8_t         BSP_GT9157_IO_Reset(void);
 /* AUDIO IO functions */
 void            AUDIO_IO_Init(void);
 void            AUDIO_IO_DeInit(void);
@@ -489,6 +489,21 @@ uint8_t BSP_TS3510_IsDetected(void)
   }  
   return 0;
 }
+uint8_t BSP_GT9157_IO_Reset(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct;
+
+  HAL_GPIO_WritePin (GPIOD, GPIO_PIN_11, GPIO_PIN_SET);
+  HAL_Delay(6);
+
+  /*配置 INT引脚，输入浮空，方便初始化 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Pull  = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+}
 /*******************************************************************************
                             BUS OPERATIONS
 *******************************************************************************/
@@ -562,7 +577,6 @@ static void I2Cx_Init(void)
     HAL_I2C_Init(&heval_I2c);    
   }
 }
-
 /**
   * @brief  Configures I2C Interrupt.
   * @param  None
@@ -637,7 +651,7 @@ static void I2Cx16_Write(uint8_t Addr, uint16_t Reg, uint8_t* Value ,uint16_t Si
 {
   HAL_StatusTypeDef status = HAL_OK;
 
-  status = HAL_I2C_Mem_Write(&heval_I2c, Addr, Reg, I2C_MEMADD_SIZE_8BIT, Value, Size, 100); 
+  status = HAL_I2C_Mem_Write(&heval_I2c, Addr, Reg, I2C_MEMADD_SIZE_16BIT, Value, Size, 100); 
 
   /* Check the communication status */
   if(status != HAL_OK)
@@ -791,6 +805,10 @@ void IOE_ITGT9157Config(void)
 {
   I2CxGT9157_ITConfig();
 }
+// void IOE_ITGT9157Config(void)//这里需要配置disable
+// {
+//   I2CxGT9157_ITConfig();
+// }
 /**
   * @brief  IOE writes single data.
   * @param  Addr: I2C address
