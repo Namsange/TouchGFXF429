@@ -137,7 +137,7 @@ void GT9157_TS_GetXY (uint16_t DeviceAddr, uint16_t * X, uint16_t * Y)
     uint32_t uldataXYZ;
 	uint8_t finger;
 	uint8_t touch_num;
-    uint8_t  point_data[2 + 1 + 8 * GTP_MAX_TOUCH] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF};
+    uint8_t point_data[11] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xFF};
     GTP_I2C_Read (DeviceAddr, point_data, 11); //10字节寄存器加2字节地址
     finger = point_data[GTP_ADDR_LENGTH];//状态寄存器数据
 
