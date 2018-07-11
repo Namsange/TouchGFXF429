@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_flash.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
   * @brief   FLASH HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the internal FLASH memory:
@@ -65,7 +63,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -111,7 +109,7 @@
 /** @addtogroup FLASH_Private_Constants
   * @{
   */
-#define FLASH_TIMEOUT_VALUE       ((uint32_t)50000)/* 50 s */
+#define FLASH_TIMEOUT_VALUE       50000U /* 50 s */
 /**
   * @}
   */         
@@ -136,7 +134,6 @@ static void   FLASH_Program_Word(uint32_t Address, uint32_t Data);
 static void   FLASH_Program_HalfWord(uint32_t Address, uint16_t Data);
 static void   FLASH_Program_Byte(uint32_t Address, uint8_t Data);
 static void   FLASH_SetErrorCode(void);
-extern void   FLASH_FlushCaches(void);
 
 HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout);
 /**
@@ -165,10 +162,10 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout);
 
 /**
   * @brief  Program byte, halfword, word or double word at a specified address
-  * @param  TypeProgram:  Indicate the way to program at a specified address.
+  * @param  TypeProgram  Indicate the way to program at a specified address.
   *                           This parameter can be a value of @ref FLASH_Type_Program
-  * @param  Address:  specifies the address to be programmed.
-  * @param  Data: specifies the data to be programmed
+  * @param  Address  specifies the address to be programmed.
+  * @param  Data specifies the data to be programmed
   * 
   * @retval HAL_StatusTypeDef HAL Status
   */
@@ -223,10 +220,10 @@ HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint
 
 /**
   * @brief   Program byte, halfword, word or double word at a specified address  with interrupt enabled.
-  * @param  TypeProgram:  Indicate the way to program at a specified address.
+  * @param  TypeProgram  Indicate the way to program at a specified address.
   *                           This parameter can be a value of @ref FLASH_Type_Program
-  * @param  Address:  specifies the address to be programmed.
-  * @param  Data: specifies the data to be programmed
+  * @param  Address  specifies the address to be programmed.
+  * @param  Data specifies the data to be programmed
   * 
   * @retval HAL Status
   */
@@ -279,17 +276,22 @@ HAL_StatusTypeDef HAL_FLASH_Program_IT(uint32_t TypeProgram, uint32_t Address, u
   */
 void HAL_FLASH_IRQHandler(void)
 {
-  uint32_t addresstmp = 0;
+  uint32_t addresstmp = 0U;
   
   /* Check FLASH operation error flags */
+#if defined(FLASH_SR_RDERR) 
   if(__HAL_FLASH_GET_FLAG((FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | \
     FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR | FLASH_FLAG_RDERR)) != RESET)
+#else
+  if(__HAL_FLASH_GET_FLAG((FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | \
+    FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR)) != RESET)
+#endif /* FLASH_SR_RDERR */
   {
     if(pFlash.ProcedureOnGoing == FLASH_PROC_SECTERASE)
     {
       /*return the faulty sector*/
       addresstmp = pFlash.Sector;
-      pFlash.Sector = 0xFFFFFFFF;
+      pFlash.Sector = 0xFFFFFFFFU;
     }
     else if(pFlash.ProcedureOnGoing == FLASH_PROC_MASSERASE)
     {
@@ -324,7 +326,7 @@ void HAL_FLASH_IRQHandler(void)
       pFlash.NbSectorsToErase--;
       
       /* Check if there are still sectors to erase*/
-      if(pFlash.NbSectorsToErase != 0)
+      if(pFlash.NbSectorsToErase != 0U)
       {
         addresstmp = pFlash.Sector;
         /*Indicate user which sector has been erased*/
@@ -339,7 +341,7 @@ void HAL_FLASH_IRQHandler(void)
       {
         /*No more sectors to Erase, user callback can be called.*/
         /*Reset Sector and stop Erase sectors procedure*/
-        pFlash.Sector = addresstmp = 0xFFFFFFFF;
+        pFlash.Sector = addresstmp = 0xFFFFFFFFU;
         pFlash.ProcedureOnGoing = FLASH_PROC_NONE;
         
         /* Flush the caches to be sure of the data consistency */
@@ -388,15 +390,17 @@ void HAL_FLASH_IRQHandler(void)
 
 /**
   * @brief  FLASH end of operation interrupt callback
-  * @param  ReturnValue: The value saved in this parameter depends on the ongoing procedure
+  * @param  ReturnValue The value saved in this parameter depends on the ongoing procedure
   *                  Mass Erase: Bank number which has been requested to erase
   *                  Sectors Erase: Sector which has been erased 
-  *                    (if 0xFFFFFFFF, it means that all the selected sectors have been erased)
+  *                    (if 0xFFFFFFFFU, it means that all the selected sectors have been erased)
   *                  Program: Address which was selected for data program
   * @retval None
   */
 __weak void HAL_FLASH_EndOfOperationCallback(uint32_t ReturnValue)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(ReturnValue);
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_FLASH_EndOfOperationCallback could be implemented in the user file
    */ 
@@ -404,7 +408,7 @@ __weak void HAL_FLASH_EndOfOperationCallback(uint32_t ReturnValue)
 
 /**
   * @brief  FLASH operation error interrupt callback
-  * @param  ReturnValue: The value saved in this parameter depends on the ongoing procedure
+  * @param  ReturnValue The value saved in this parameter depends on the ongoing procedure
   *                 Mass Erase: Bank number which has been requested to erase
   *                 Sectors Erase: Sector number which returned an error
   *                 Program: Address which was selected for data program
@@ -412,6 +416,8 @@ __weak void HAL_FLASH_EndOfOperationCallback(uint32_t ReturnValue)
   */
 __weak void HAL_FLASH_OperationErrorCallback(uint32_t ReturnValue)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(ReturnValue);
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_FLASH_OperationErrorCallback could be implemented in the user file
    */ 
@@ -442,18 +448,22 @@ __weak void HAL_FLASH_OperationErrorCallback(uint32_t ReturnValue)
   */
 HAL_StatusTypeDef HAL_FLASH_Unlock(void)
 {
-  if((FLASH->CR & FLASH_CR_LOCK) != RESET)
+  HAL_StatusTypeDef status = HAL_OK;
+
+  if(READ_BIT(FLASH->CR, FLASH_CR_LOCK) != RESET)
   {
     /* Authorize the FLASH Registers access */
-    FLASH->KEYR = FLASH_KEY1;
-    FLASH->KEYR = FLASH_KEY2;
+    WRITE_REG(FLASH->KEYR, FLASH_KEY1);
+    WRITE_REG(FLASH->KEYR, FLASH_KEY2);
+
+    /* Verify Flash is unlocked */
+    if(READ_BIT(FLASH->CR, FLASH_CR_LOCK) != RESET)
+    {
+      status = HAL_ERROR;
+    }
   }
-  else
-  {
-    return HAL_ERROR;
-  }
-  
-  return HAL_OK; 
+
+  return status;
 }
 
 /**
@@ -552,12 +562,12 @@ uint32_t HAL_FLASH_GetError(void)
 
 /**
   * @brief  Wait for a FLASH operation to complete.
-  * @param  Timeout: maximum flash operationtimeout
+  * @param  Timeout maximum flash operationtimeout
   * @retval HAL Status
   */
 HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout)
 { 
-  uint32_t tickstart = 0;
+  uint32_t tickstart = 0U;
   
   /* Clear Error Code */
   pFlash.ErrorCode = HAL_FLASH_ERROR_NONE;
@@ -572,7 +582,7 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout)
   { 
     if(Timeout != HAL_MAX_DELAY)
     {
-      if((Timeout == 0)||((HAL_GetTick() - tickstart ) > Timeout))
+      if((Timeout == 0U)||((HAL_GetTick() - tickstart ) > Timeout))
       {
         return HAL_TIMEOUT;
       }
@@ -580,14 +590,18 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout)
   }
 
   /* Check FLASH End of Operation flag  */
-  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_EOP))
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_EOP) != RESET)
   {
     /* Clear FLASH End of Operation pending bit */
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP);
   }
-  
+#if defined(FLASH_SR_RDERR)  
   if(__HAL_FLASH_GET_FLAG((FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | \
                            FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR | FLASH_FLAG_RDERR)) != RESET)
+#else
+  if(__HAL_FLASH_GET_FLAG((FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | \
+                           FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR)) != RESET)
+#endif /* FLASH_SR_RDERR */
   {
     /*Save the error code*/
     FLASH_SetErrorCode();
@@ -602,13 +616,13 @@ HAL_StatusTypeDef FLASH_WaitForLastOperation(uint32_t Timeout)
 /**
   * @brief  Program a double word (64-bit) at a specified address.
   * @note   This function must be used when the device voltage range is from
-  *         2.7V to 3.6V and an External Vpp is present.
+  *         2.7V to 3.6V and Vpp in the range 7V to 9V.
   *
   * @note   If an erase and a program operations are requested simultaneously,    
   *         the erase operation is performed before the program one.
   *  
-  * @param  Address: specifies the address to be programmed.
-  * @param  Data: specifies the data to be programmed.
+  * @param  Address specifies the address to be programmed.
+  * @param  Data specifies the data to be programmed.
   * @retval None
   */
 static void FLASH_Program_DoubleWord(uint32_t Address, uint64_t Data)
@@ -621,7 +635,9 @@ static void FLASH_Program_DoubleWord(uint32_t Address, uint64_t Data)
   FLASH->CR |= FLASH_PSIZE_DOUBLE_WORD;
   FLASH->CR |= FLASH_CR_PG;
 
-  *(__IO uint64_t*)Address = Data;
+  /* Program the double-word */
+  *(__IO uint32_t*)Address = (uint32_t)Data;
+  *(__IO uint32_t*)(Address+4) = (uint32_t)(Data >> 32);
 }
 
 
@@ -633,8 +649,8 @@ static void FLASH_Program_DoubleWord(uint32_t Address, uint64_t Data)
   * @note   If an erase and a program operations are requested simultaneously,    
   *         the erase operation is performed before the program one.
   *  
-  * @param  Address: specifies the address to be programmed.
-  * @param  Data: specifies the data to be programmed.
+  * @param  Address specifies the address to be programmed.
+  * @param  Data specifies the data to be programmed.
   * @retval None
   */
 static void FLASH_Program_Word(uint32_t Address, uint32_t Data)
@@ -653,13 +669,13 @@ static void FLASH_Program_Word(uint32_t Address, uint32_t Data)
 /**
   * @brief  Program a half-word (16-bit) at a specified address.
   * @note   This function must be used when the device voltage range is from
-  *         2.7V to 3.6V.
+  *         2.1V to 3.6V.
   *
   * @note   If an erase and a program operations are requested simultaneously,    
   *         the erase operation is performed before the program one.
   *  
-  * @param  Address: specifies the address to be programmed.
-  * @param  Data: specifies the data to be programmed.
+  * @param  Address specifies the address to be programmed.
+  * @param  Data specifies the data to be programmed.
   * @retval None
   */
 static void FLASH_Program_HalfWord(uint32_t Address, uint16_t Data)
@@ -678,13 +694,13 @@ static void FLASH_Program_HalfWord(uint32_t Address, uint16_t Data)
 /**
   * @brief  Program byte (8-bit) at a specified address.
   * @note   This function must be used when the device voltage range is from
-  *         2.7V to 3.6V.
+  *         1.8V to 3.6V.
   *
   * @note   If an erase and a program operations are requested simultaneously,    
   *         the erase operation is performed before the program one.
   *  
-  * @param  Address: specifies the address to be programmed.
-  * @param  Data: specifies the data to be programmed.
+  * @param  Address specifies the address to be programmed.
+  * @param  Data specifies the data to be programmed.
   * @retval None
   */
 static void FLASH_Program_Byte(uint32_t Address, uint8_t Data)
@@ -737,7 +753,7 @@ static void FLASH_SetErrorCode(void)
     /* Clear FLASH Programming sequence error pending bit */
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_PGSERR);
   }
-  
+#if defined(FLASH_SR_RDERR) 
   if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_RDERR) != RESET)
   {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_RD;
@@ -745,7 +761,7 @@ static void FLASH_SetErrorCode(void)
     /* Clear FLASH Proprietary readout protection error pending bit */
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_RDERR);
   }
-  
+#endif /* FLASH_SR_RDERR */  
   if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_OPERR) != RESET)
   {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_OPERATION;

@@ -162,7 +162,7 @@ uint8_t         IOE_Read(uint8_t Addr, uint8_t Reg);
 void            IOE16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size);
 uint16_t        IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
 void            IOE_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
-uint8_t         BSP_GT9157_IO_Reset(void);
+void         	BSP_GT9157_IO_Reset(void);
 /* AUDIO IO functions */
 void            AUDIO_IO_Init(void);
 void            AUDIO_IO_DeInit(void);
@@ -489,7 +489,7 @@ uint8_t BSP_TS3510_IsDetected(void)
   }  
   return 0;
 }
-uint8_t BSP_GT9157_IO_Reset(void)
+void BSP_GT9157_IO_Reset(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct;
 
