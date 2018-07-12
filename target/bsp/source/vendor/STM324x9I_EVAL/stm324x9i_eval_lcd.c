@@ -174,7 +174,7 @@ uint8_t BSP_LCD_Init(void)
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
 
   /* Initialize the LCD pixel width and pixel height */
-  hltdc_eval.LayerCfg->ImageWidth  = 640;
+  hltdc_eval.LayerCfg->ImageWidth  = 800;
   hltdc_eval.LayerCfg->ImageHeight = 480;   
 
   /* Background value */

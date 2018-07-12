@@ -156,18 +156,18 @@ static void initLCD()
     LCD_LayerCfgTypeDef  Layercfg;
     LTDC_HandleTypeDef ltdc;
 
-    Layercfg.WindowX0 = 80;
-    Layercfg.WindowX1 = 640+80;//BSP_LCD_GetXSize();
+    Layercfg.WindowX0 = 0;
+    Layercfg.WindowX1 = BSP_LCD_GetXSize();
     Layercfg.WindowY0 = 0;
-    Layercfg.WindowY1 = 480;//BSP_LCD_GetYSize();
+    Layercfg.WindowY1 = BSP_LCD_GetYSize();
     Layercfg.FBStartAdress = frameBuf0;
     Layercfg.Alpha = 255;
     Layercfg.Alpha0 = 0;
     Layercfg.Backcolor.Blue = 0;
     Layercfg.Backcolor.Green = 0;
     Layercfg.Backcolor.Red = 0;
-    Layercfg.ImageWidth = 640;//BSP_LCD_GetXSize();
-    Layercfg.ImageHeight = 480;//BSP_LCD_GetYSize();
+    Layercfg.ImageWidth = BSP_LCD_GetXSize();
+    Layercfg.ImageHeight = BSP_LCD_GetYSize();
 
 #if !defined(USE_BPP) || USE_BPP==16
     Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
