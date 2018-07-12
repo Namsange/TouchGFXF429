@@ -13,10 +13,10 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
 
-#include <gui/screen1_screen/Screen1View.hpp>
-#include <gui/screen1_screen/Screen1Presenter.hpp>
 #include <gui/screen2_screen/Screen2View.hpp>
 #include <gui/screen2_screen/Screen2Presenter.hpp>
+#include <gui/screen1_screen/Screen1View.hpp>
+#include <gui/screen1_screen/Screen1Presenter.hpp>
 
 
 /**
@@ -39,8 +39,8 @@ public:
      * A list of all view types. Must end with meta::Nil.
      * @note All view types used in the application MUST be added to this list!
      */
-    typedef meta::TypeList< Screen1View,
-            meta::TypeList< Screen2View,
+    typedef meta::TypeList< Screen2View,
+            meta::TypeList< Screen1View,
             meta::Nil >
             > GeneratedViewTypes;
 
@@ -53,8 +53,8 @@ public:
      * A list of all presenter types. Must end with meta::Nil.
      * @note All presenter types used in the application MUST be added to this list!
      */
-    typedef meta::TypeList< Screen1Presenter,
-            meta::TypeList< Screen2Presenter,
+    typedef meta::TypeList< Screen2Presenter,
+            meta::TypeList< Screen1Presenter,
             meta::Nil >
             > GeneratedPresenterTypes;
 
@@ -68,8 +68,8 @@ public:
      * @note All transition types used in the application MUST be added to this list!
      */
     typedef meta::TypeList< NoTransition,
-            meta::TypeList< SlideTransition<WEST>,
             meta::TypeList< SlideTransition<EAST>,
+            meta::TypeList< SlideTransition<WEST>,
             meta::Nil > >
             > GeneratedTransitionTypes;
 

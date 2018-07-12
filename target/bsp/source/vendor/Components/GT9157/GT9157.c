@@ -112,14 +112,14 @@ uint16_t GT9157_ReadID (uint16_t DeviceAddr)
 uint8_t GT9157_TS_DetectTouch (uint16_t DeviceAddr)
 {
     uint8_t ret = 1;
-    // uint8_t  finger = 0;
-    // uint8_t  point_data[11] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xff}; 
-    // //GTP_I2C_Read (DeviceAddr, point_data, 11);
+    uint8_t  finger = 0;
+    uint8_t  point_data[11] = {GTP_READ_COOR_ADDR >> 8, GTP_READ_COOR_ADDR & 0xff}; 
+    GTP_I2C_Read (DeviceAddr, point_data, 11);
 
-    // finger = point_data[2];//状态寄存器数据
-    // if (finger == 0x00) {	//没有数据，退出
-    //     ret = 0;
-    // }
+    finger = point_data[2];//状态寄存器数据
+    if (finger == 0x00) {	//没有数据，退出
+        ret = 0;
+    }
 
     return ret;
 }

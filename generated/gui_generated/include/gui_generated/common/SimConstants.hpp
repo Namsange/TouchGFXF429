@@ -4,7 +4,7 @@
 #ifndef SIMCONSTANTS_HPP
 #define SIMCONSTANTS_HPP
 
-static unsigned short SIM_WIDTH = 640;
+static unsigned short SIM_WIDTH = 800;
 static unsigned short SIM_HEIGHT = 480;
 static const char* SIM_TITLE = "STM32F4x9I";
 

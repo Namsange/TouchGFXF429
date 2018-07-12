@@ -9,10 +9,10 @@
 Screen2ViewBase::Screen2ViewBase()  :
     buttonCallback(this, &Screen2ViewBase::buttonCallbackHandler)
 {
-    box2.setPosition(0, 0, 640, 480);
-    box2.setColor(touchgfx::Color::getColorFrom24BitRGB(206, 255, 32));
+    box2.setPosition(0, 0, 800, 480);
+    box2.setColor(touchgfx::Color::getColorFrom24BitRGB(86, 230, 57));
 
-    buttonWithLabel2.setPosition(235, 210, 170, 60);
+    buttonWithLabel2.setPosition(315, 210, 170, 60);
     buttonWithLabel2.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
     buttonWithLabel2.setLabelText(TypedText(T_SINGLEUSEID2));
     buttonWithLabel2.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
