@@ -39,7 +39,7 @@
 #include "bsp/STM324x9ITouchController.hpp"
 #include "stm324x9i_eval_ts.h"
 #include "stm324x9i_eval_lcd.h"
-
+#include "Bsp.h"
 using namespace touchgfx;
 
 void STM324x9ITouchController::init()
@@ -60,7 +60,6 @@ bool STM324x9ITouchController::sampleTouch(int32_t& x, int32_t& y)
         {
             x = state.x;
             y = state.y;
-
             return true;
         }
     }

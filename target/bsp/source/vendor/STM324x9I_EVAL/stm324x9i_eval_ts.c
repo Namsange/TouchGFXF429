@@ -156,7 +156,7 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
     /* Initialize the TS driver structure */
     ts_driver = &GT9157_ts_drv;  
     I2C_Address = GTP_ADDRESS;
-    ts_orientation = TS_SWAP_Y;
+    ts_orientation = TS_SWAP_NONE;//TS_SWAP_Y;
   }
   else
   {
@@ -271,7 +271,7 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       _y = y; 
     }
     
-    if(I2C_Address == EXC7200_I2C_ADDRESS)
+    if(I2C_Address == GTP_ADDRESS)
     { 
       TS_State->x = x;
       TS_State->y = y;        

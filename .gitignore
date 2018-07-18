@@ -1,71 +1,53 @@
-# Prerequisites
-*.d
+# Setting
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-*.dep
-*.axf
-*.plg
-Obj
-Exe
-List
-settings
-
-# Linker output
-*.ilk
-*.map
-*.exp
-*.crf
-*.chai
-*.chaiz
-*.dep
-*.lst
-*.lnp
-*.htm
-*.m51
-settings.json
-JLinkLog.txt
 desktop.ini
+settings.json
 
-# Precompiled Headers
-*.gch
-*.pch
+# IAR
 
-# Libraries
-*.lib
+EWARM/**/Obj/
+EWARM/**/Exe/
+EWARM/**/List/
+EWARM/settings/
+EWARM/*dep
+
+# Keil
+
+*.uvguix.chai
+MDK-ARM/**/*.o
+MDK-ARM/**/*.d
+MDK-ARM/**/*.crf
+MDK-ARM/**/*.htm
+MDK-ARM/**/*.map
+MDK-ARM/**/*.axf
+MDK-ARM/**/*.lnp
+MDK-ARM/**/*.lnp
+MDK-ARM/**/*.dep
+MDK-ARM/**/*.hex
+MDK-ARM/DebugConfig/
+MDK-ARM/JlinkLog.txt
+MDK-ARM/*.lst
+
+# TouchGFX
+
+target/Keil/**/*.o
+target/Keil/**/*.d
+target/Keil/**/*.crf
+target/Keil/**/*.htm
+target/Keil/**/*.map
+target/Keil/**/*.axf
+target/Keil/**/*.lnp
+target/Keil/**/*.dep
+target/Keil/**/*.hex
+target/Keil/**/*.lst
+target/Keil/JlinkLog.txt
+
+touchgfx/lib/sdl2/win32/*.lib
+touchgfx/lib/sdl2/win32/*.dll
+touchgfx/lib/win/msvs/*.lib
+
+# other
+
 *.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
 *.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-*.bak
+build/

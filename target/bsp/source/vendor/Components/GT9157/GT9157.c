@@ -63,7 +63,7 @@ void GT9157_Init (uint16_t DeviceAddr)
 
     IOE_Init();//配置GPIO口和i2c的属性
     BSP_GT9157_IO_Reset();//复位INT与RESET管脚，选中器械地址为0xBA
-    IOE_ITGT9157Config();//使能INT中断口
+    //IOE_ITGT9157Config();//使能INT中断口
 
     cfg_info =  CTP_CFG_GT9157;                     //指向寄存器配置
     cfg_info_len = CFG_GROUP_LEN (CTP_CFG_GT9157);  //计算配置表的大小
@@ -80,7 +80,7 @@ void GT9157_Init (uint16_t DeviceAddr)
 
     //写入配置信息
     GTP_I2C_Write (DeviceAddr, config, cfg_num + GTP_ADDR_LENGTH + 2);
-    IOE_ITGT9157Config();
+    // IOE_ITGT9157Config();
 }
 void GT9157_Reset(uint16_t DeviceAddr)
 {
@@ -144,25 +144,21 @@ void GT9157_TS_GetXY (uint16_t DeviceAddr, uint16_t * X, uint16_t * Y)
     if (finger == 0x00) {	//没有数据，退出
         return;
     }
-    if ((finger & 0x80) == 0) { //判断buffer status位
-        goto exit_work_func;//坐标未就绪，数据无效
+    if ((finger & 0x80) != 0) { //判断buffer status位
+        touch_num = finger & 0x0f;//坐标点数
+        if(touch_num < GTP_MAX_TOUCH)
+        {
+            uldataXYZ = (point_data[5] << 24) | (point_data[4] << 16) | (point_data[7] << 8) | (point_data[6] << 0);
+            *X = (uldataXYZ >> 16) & 0x0000FFFF;
+            *Y = (uldataXYZ) & 0x0000FFFF;
+        }
     }
-    touch_num = finger & 0x0f;//坐标点数
-    if (touch_num > GTP_MAX_TOUCH) {
-        goto exit_work_func;//大于最大支持点数，错误退出
-    }
-
-    uldataXYZ = (point_data[5] << 24) | (point_data[4] << 16) | (point_data[7] << 8) | (point_data[6] << 0);
-    *X = (uldataXYZ >> 16) & 0x0000FFFF;
-    *Y = (uldataXYZ) & 0x0000FFFF;
-exit_work_func: {
-        GTP_I2C_Write(DeviceAddr, end_cmd, 3);
-    }
+    GTP_I2C_Write(DeviceAddr, end_cmd, 3);
 }
 void GT9157_TS_EnableIT (uint16_t DeviceAddr)
 {
     //   IOE_ITConfig();
-    IOE_ITGT9157Config();
+    // IOE_ITGT9157Config();
     /* Enable global interrupt */
     // GT9157_EnableGlobalIT ();
 }
