@@ -99,10 +99,7 @@ void hw_init()
     HAL_Init();
     SystemClock_Config();
     MX_GPIO_Init();
-    //BSP_NOR_Init();
     initLCD();
-    
-    //GPIO::init();
 }
 
 STM32F4DMA dma;

@@ -16,12 +16,12 @@ extern "C" {
 
 extern TS_DrvTypeDef GT9157_ts_drv;
 
-extern void IOE16_Write(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size);
-extern void IOE16_Read(uint8_t Addr, uint16_t Reg, uint8_t* Value, uint16_t Size);
-extern void IOE_Init(void);
-extern void HAL_Delay(uint32_t);
-extern void IOE_ITGT9157Config(void);
-extern void BSP_GT9157_IO_Reset(void);
+extern void IOE16_Write (uint8_t Addr, uint16_t Reg, uint8_t * Value, uint16_t Size);
+extern void IOE16_Read (uint8_t Addr, uint16_t Reg, uint8_t * Value, uint16_t Size);
+extern void IOE_Init (void);
+extern void HAL_Delay (uint32_t);
+extern void IOE_ITGT9157Config (void);
+extern void BSP_GT9157_IO_Reset (void);
 void GT9157_Init (uint16_t DeviceAddr);
 uint16_t GT9157_ReadID (uint16_t DeviceAddr);
 void GT9157_Reset (uint16_t DeviceAddr);
