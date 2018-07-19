@@ -1,0 +1,419 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "Name": "backgroundBox",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 480,
+            "Type": "Box",
+            "Visible": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "bg.png",
+            "Alpha": 255,
+            "Name": "backgroundImage",
+            "X": 0,
+            "Y": 0,
+            "Width": 480,
+            "Height": 272,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "counter_box.png",
+            "Alpha": 255,
+            "Name": "counterBackgroundImage",
+            "X": 293,
+            "Y": 59,
+            "Width": 152,
+            "Height": 154,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "TextId1",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "TextId": "SingleUseId1",
+              "UseBuffer": true,
+              "BufferSize": 3
+            },
+            "Name": "countTxt",
+            "X": 293,
+            "Y": 87,
+            "Width": 152,
+            "Height": 89,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "up_btn_pressed.png",
+            "Released": "up_btn.png",
+            "Alpha": 255,
+            "Name": "buttonUp",
+            "X": 52,
+            "Y": 59,
+            "Width": 130,
+            "Height": 56,
+            "Type": "Button",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "down_btn_pressed.png",
+            "Released": "down_btn.png",
+            "Alpha": 255,
+            "Name": "buttonDown",
+            "X": 52,
+            "Y": 157,
+            "Width": 130,
+            "Height": 56,
+            "Type": "Button",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Color": {
+              "Red": 227,
+              "Green": 44,
+              "Blue": 72
+            },
+            "Alpha": 255,
+            "Name": "box2",
+            "X": 35,
+            "Y": 385,
+            "Width": 735,
+            "Height": 77,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "IsHorizontalSlider": true,
+            "BackgroundUnselected": "__designer\\blue_slider_horizontal_large_slider_round_back.png",
+            "BackgroundSelected": "__designer\\blue_slider_horizontal_large_slider_round_fill.png",
+            "Indicator": "__designer\\blue_slider_horizontal_large_indicators_slider_round_nob.png",
+            "BackgroundX": 2,
+            "BackgroundY": 22,
+            "IndicatorPos": 0,
+            "IndicatorMax": 621,
+            "IndicatorMin": 0,
+            "ValueMax": 100,
+            "ValueMin": 0,
+            "InitValue": 0,
+            "Style": "Style1",
+            "Name": "slider1",
+            "X": 60,
+            "Y": 395,
+            "Width": 680,
+            "Height": 58,
+            "Type": "Slider",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "SingleUseId2",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 171,
+              "Green": 214,
+              "Blue": 21
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Name": "textArea1",
+            "X": 26,
+            "Y": 287,
+            "Width": 428,
+            "Height": 92,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Color": {
+              "Red": 53,
+              "Green": 227,
+              "Blue": 86
+            },
+            "Alpha": 255,
+            "Name": "box1",
+            "X": 496,
+            "Y": 19,
+            "Width": 285,
+            "Height": 352,
+            "Type": "Box",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "__designer\\blue_togglebars_toggle_round_large_button_on.png",
+            "Released": "__designer\\blue_togglebars_toggle_round_large_button_off.png",
+            "Alpha": 255,
+            "Style": "Style4",
+            "Name": "toggleButton1",
+            "X": 599,
+            "Y": 45,
+            "Width": 128,
+            "Height": 38,
+            "Type": "ToggleButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "__designer\\blue_buttons_round_small_pressed.png",
+            "Released": "__designer\\blue_buttons_round_small.png",
+            "Alpha": 255,
+            "IconPressed": "__designer\\blue_icons_add_new_32.png",
+            "IconReleased": "__designer\\blue_icons_add_new_32.png",
+            "IconX": 71,
+            "IconY": 16,
+            "IconHeight": 29,
+            "IconWidth": 29,
+            "ButtonStyle": "Style8",
+            "IconStyle": "Icon1",
+            "Name": "buttonWithIcon1",
+            "X": 578,
+            "Y": 281,
+            "Width": 170,
+            "Height": 60,
+            "Type": "ButtonWithIcon",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "IsHorizontalSlider": false,
+            "BackgroundUnselected": "__designer\\blue_slider_vertical_medium_slider3_vertical_round_back.png",
+            "BackgroundSelected": "__designer\\blue_slider_vertical_medium_slider3_vertical_round_fill.png",
+            "Indicator": "__designer\\blue_slider_vertical_medium_indicators_slider3_vertical_round_nob.png",
+            "BackgroundX": 7,
+            "BackgroundY": 3,
+            "IndicatorPos": 0,
+            "IndicatorMax": 285,
+            "IndicatorMin": 0,
+            "ValueMax": 100,
+            "ValueMin": 0,
+            "InitValue": 0,
+            "Style": "Style4",
+            "Name": "slider2",
+            "X": 516,
+            "Y": 28,
+            "Width": 34,
+            "Height": 339,
+            "Type": "Slider",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "__designer\\blue_togglebars_toggle_round_large_button_on.png",
+            "Released": "__designer\\blue_togglebars_toggle_round_large_button_off.png",
+            "Alpha": 255,
+            "Style": "Style4",
+            "Name": "toggleButton2",
+            "X": 600,
+            "Y": 96,
+            "Width": 128,
+            "Height": 38,
+            "Type": "ToggleButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "__designer\\blue_togglebars_toggle_re_small_button_on.png",
+            "Released": "__designer\\blue_togglebars_toggle_re_small_button_off.png",
+            "Alpha": 255,
+            "Style": "Style3",
+            "Name": "toggleButton3",
+            "X": 616,
+            "Y": 152,
+            "Width": 96,
+            "Height": 38,
+            "Type": "ToggleButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Pressed": "__designer\\blue_buttons_round_icon_button_pressed.png",
+            "Released": "__designer\\blue_buttons_round_icon_button.png",
+            "Alpha": 255,
+            "Style": "Style5",
+            "Name": "button1",
+            "X": 634,
+            "Y": 205,
+            "Width": 60,
+            "Height": 60,
+            "Type": "Button",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "IncreaseValue",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "buttonUp",
+              "Type": "TriggerClicked"
+            },
+            "Action": {
+              "FunctionName": "increaseValue",
+              "Type": "ActionCustom"
+            }
+          },
+          {
+            "InteractionName": "DecreaseValue",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "buttonDown",
+              "Type": "TriggerClicked"
+            },
+            "Action": {
+              "FunctionName": "decreaseValue",
+              "Type": "ActionCustom"
+            }
+          }
+        ],
+        "Name": "Main"
+      }
+    ],
+    "CustomContainerDefinitions": [],
+    "TextEntries": [
+      {
+        "TextEntryId": "TextId1",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId1",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId2",
+        "IsResource": false
+      }
+    ],
+    "Name": "But429",
+    "Resolution": {
+      "Width": 800,
+      "Height": 480
+    },
+    "SelectedColorDepth": 16,
+    "StartupScreenName": "Main",
+    "SelectedStartupLanguage": "GB",
+    "Skin": "Blue",
+    "TouchGfxPath": "touchgfx",
+    "UIPath": ".",
+    "ApplicationTemplate": {
+      "Name": "Simulator",
+      "Version": "1.0.0",
+      "Description": "Simulator Application Template",
+      "AvailableColorDepths": [
+        16,
+        24
+      ],
+      "AvailableImageFormats": {
+        "16": {
+          "Opaque": "RGB565",
+          "NonOpaque": "ARGB8888"
+        },
+        "24": {
+          "Opaque": "RGB888",
+          "NonOpaque": "ARGB8888"
+        }
+      },
+      "AvailableResolutions": [
+        {
+          "Width": 480,
+          "Height": 272
+        },
+        {
+          "Width": 640,
+          "Height": 480
+        },
+        {
+          "Width": 800,
+          "Height": 480
+        }
+      ],
+      "PhysicalButtons": [],
+      "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j10",
+      "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+      "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j10",
+      "RunSimulatorCommand": "build\\bin\\simulator.exe",
+      "CompileTargetCommand": "",
+      "FlashTargetCommand": ""
+    }
+  },
+  "Version": "4.9.3",
+  "CreatedBy": "4.9.3"
+}
