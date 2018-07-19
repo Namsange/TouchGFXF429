@@ -805,10 +805,7 @@ void IOE_ITGT9157Config(void)
 {
   I2CxGT9157_ITConfig();
 }
-// void IOE_ITGT9157Config(void)//这里需要配置disable
-// {
-//   I2CxGT9157_ITConfig();
-// }
+
 /**
   * @brief  IOE writes single data.
   * @param  Addr: I2C address

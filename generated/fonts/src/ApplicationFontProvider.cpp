@@ -8,9 +8,7 @@
 using namespace touchgfx;
 #endif
 
-extern touchgfx::InternalFlashFont& getFont_verdana_20_4bpp();
-extern touchgfx::InternalFlashFont& getFont_verdana_40_4bpp();
-extern touchgfx::InternalFlashFont& getFont_verdana_10_4bpp();
+extern touchgfx::InternalFlashFont& getFont_Asap_Regular_80_4bpp();
 
 touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId fontId)
 {
@@ -18,13 +16,7 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId fontId)
   {
     
     case Typography::DEFAULT:
-      return &(getFont_verdana_20_4bpp());
-    
-    case Typography::LARGE:
-      return &(getFont_verdana_40_4bpp());
-    
-    case Typography::SMALL:
-      return &(getFont_verdana_10_4bpp());
+      return &(getFont_Asap_Regular_80_4bpp());
     
     default:
       return 0;

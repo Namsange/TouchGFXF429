@@ -9,29 +9,25 @@
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 安装TouchGFX4.9.3
+2. 安装Keil 5
+3. 安装下载驱动及软件
 
 #### 使用说明
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 使用TouchGFX生成代码时，选择stm32469平台，选择PC应该也可以没有试过
+2. 配置完图形界面后，将根目录下generated和gui文件替换原工程文件，keil添加这两个文件夹下的.cpp，并且添加hpp路径
+3. User文件夹内为SDRAM驱动
 
-#### 参与贡献
+#### 作者
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+交流方式 QQ:921380017
 
+#### 平台问题
 
-#### 码云特技
+野火stm32f429内部flash有限，并且没有提供外部扩展flash接口，所以爱好者生成的代码应该小于1M，否者烧录失败。
+最好不要添加照片
 
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### 已知bug
+
+上电开机需要复位，解决方法猜想，液晶屏的复位比芯片的复位慢，所以上电后，芯片给液晶发的指令是错误，后续有时间再修改

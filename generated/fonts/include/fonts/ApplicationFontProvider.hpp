@@ -9,8 +9,6 @@
 struct Typography
 {
   static const touchgfx::FontId DEFAULT = 0;
-  static const touchgfx::FontId LARGE = 1;
-  static const touchgfx::FontId SMALL = 2;
 };
 
 class ApplicationFontProvider : public touchgfx::FontProvider

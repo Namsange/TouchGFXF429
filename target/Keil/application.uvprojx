@@ -52,7 +52,7 @@
           <OutputName>application</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -335,7 +335,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>ST STM32F429xx USE_OS_SYSTICK USE_BPP=16</Define>
+              <Define>ST STM32F429xx USE_OS_SYSTICK USE_BPP=16 USE_STDPERIPH_DRIVER USE_FLOATING_POINT USE_OS_SYSTICK USE_IOEXPANDER</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\gui\include;..\..\platform\os;..\..\generated\fonts\include;..\..\generated\images\include;..\..\generated\texts\include;..\..\generated\gui_generated\include;../../touchgfx/framework/include;../bsp/include\platform\core\arm\cortex-m\CMSIS;../bsp/include\platform\hal\ST\mcu\stm32f4cube;../bsp/include/platform/stm32f4cube/CMSIS;..\bsp\include;..\bsp\include\bsp;..\bsp\source\vendor\STM324x9I_EVAL;..\bsp\include\platform\stm32f4cube\STM32F4xx_HAL_Driver;..\os\FreeRTOS7.6.0\Source\include;..\os\FreeRTOS7.6.0\;..\os\FreeRTOS7.6.0\Source\portable\RVDS\ARM_CM4F;..\..\User</IncludePath>
             </VariousControls>
@@ -359,7 +359,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>0</umfTarg>
+            <umfTarg>1</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -642,24 +642,14 @@
               <FilePath>../../gui/src/model/model.cpp</FilePath>
             </File>
             <File>
-              <FileName>Screen1Presenter.cpp</FileName>
+              <FileName>MainPresenter.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../gui/src/screen1_screen/screen1presenter.cpp</FilePath>
+              <FilePath>..\..\gui\src\main_screen\MainPresenter.cpp</FilePath>
             </File>
             <File>
-              <FileName>Screen1View.cpp</FileName>
+              <FileName>MainView.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>../../gui/src/screen1_screen/screen1view.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2Presenter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen2_screen/screen2presenter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2View.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../gui/src/screen2_screen/screen2view.cpp</FilePath>
+              <FilePath>..\..\gui\src\main_screen\MainView.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -677,31 +667,6 @@
               <FilePath>../../generated/images/src/bitmapdatabase.cpp</FilePath>
             </File>
             <File>
-              <FileName>blue_buttons_round_edge_small.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/images/src/__designer/blue_buttons_round_edge_small.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>blue_buttons_round_edge_small_pressed.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/images/src/__designer/blue_buttons_round_edge_small_pressed.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_verdana_10_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/font_verdana_40_4bpp.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FontGetters.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../generated/fonts/src/fontgetters.cpp</FilePath>
@@ -712,49 +677,9 @@
               <FilePath>../../generated/gui_generated/src/common/frontendapplicationbase.cpp</FilePath>
             </File>
             <File>
-              <FileName>Kerning_verdana_10_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Kerning_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/kerning_verdana_40_4bpp.cpp</FilePath>
-            </File>
-            <File>
               <FileName>LanguageGb.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../generated/texts/src/languagegb.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen1ViewBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/gui_generated/src/screen1_screen/screen1viewbase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Screen2ViewBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/gui_generated/src/screen2_screen/screen2viewbase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_10_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_10_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_20_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_20_4bpp.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Table_verdana_40_4bpp.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../../generated/fonts/src/table_verdana_40_4bpp.cpp</FilePath>
             </File>
             <File>
               <FileName>Texts.cpp</FileName>
@@ -765,6 +690,141 @@
               <FileName>TypedTextDatabase.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../../generated/texts/src/typedtextdatabase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>bg.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\bg.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_Asap_Regular_80_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\fonts\src\Font_Asap_Regular_80_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Kerning_Asap_Regular_80_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\fonts\src\Kerning_Asap_Regular_80_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Table_Asap_Regular_80_4bpp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\fonts\src\Table_Asap_Regular_80_4bpp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MainViewBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\gui_generated\src\main_screen\MainViewBase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_slider_horizontal_large_indicators_slider_round_nob.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_slider_horizontal_large_indicators_slider_round_nob.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_slider_horizontal_large_slider_round_back.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_slider_horizontal_large_slider_round_back.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_slider_horizontal_large_slider_round_fill.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_slider_horizontal_large_slider_round_fill.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_togglebars_toggle_round_large_button_off.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_togglebars_toggle_round_large_button_off.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_togglebars_toggle_round_large_button_on.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_togglebars_toggle_round_large_button_on.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>counter_box.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\counter_box.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>down_btn.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\down_btn.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>down_btn_disabled.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\down_btn_disabled.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>down_btn_pressed.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\down_btn_pressed.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>up_btn.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\up_btn.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>up_btn_disabled.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\up_btn_disabled.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>up_btn_pressed.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\up_btn_pressed.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_buttons_round_icon_button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_buttons_round_icon_button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_buttons_round_icon_button_pressed.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_buttons_round_icon_button_pressed.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_buttons_round_small.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_buttons_round_small.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_buttons_round_small_pressed.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_buttons_round_small_pressed.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_icons_add_new_32.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_icons_add_new_32.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_slider_vertical_medium_indicators_slider3_vertical_round_nob.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_slider_vertical_medium_indicators_slider3_vertical_round_nob.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_slider_vertical_medium_slider3_vertical_round_back.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_slider_vertical_medium_slider3_vertical_round_back.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_slider_vertical_medium_slider3_vertical_round_fill.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_slider_vertical_medium_slider3_vertical_round_fill.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_togglebars_toggle_re_small_button_off.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_togglebars_toggle_re_small_button_off.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>blue_togglebars_toggle_re_small_button_on.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\generated\images\src\__designer\blue_togglebars_toggle_re_small_button_on.cpp</FilePath>
             </File>
           </Files>
         </Group>

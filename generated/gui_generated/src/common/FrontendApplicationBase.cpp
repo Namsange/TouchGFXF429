@@ -7,10 +7,15 @@
 #include <touchgfx/transitions/NoTransition.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/Texts.hpp>
+<<<<<<< HEAD
 #include <gui/screen2_screen/Screen2View.hpp>
 #include <gui/screen2_screen/Screen2Presenter.hpp>
 #include <gui/screen1_screen/Screen1View.hpp>
 #include <gui/screen1_screen/Screen1Presenter.hpp>
+=======
+#include <gui/main_screen/MainView.hpp>
+#include <gui/main_screen/MainPresenter.hpp>
+>>>>>>> NewHal
 
 using namespace touchgfx;
 
@@ -27,6 +32,7 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
 /*
  * Screen Transition Declarations
  */
+<<<<<<< HEAD
 // Screen2
 
 void FrontendApplicationBase::gotoScreen2ScreenSlideTransitionWest()
@@ -41,15 +47,19 @@ void FrontendApplicationBase::gotoScreen2ScreenSlideTransitionWestImpl()
 }
 
 // Screen1
+=======
+// Main
+>>>>>>> NewHal
 
-void FrontendApplicationBase::gotoScreen1ScreenNoTransition()
+void FrontendApplicationBase::gotoMainScreenNoTransition()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoScreen1ScreenNoTransitionImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenNoTransitionImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplicationBase::gotoScreen1ScreenNoTransitionImpl()
+void FrontendApplicationBase::gotoMainScreenNoTransitionImpl()
 {
+<<<<<<< HEAD
     makeTransition<Screen1View, Screen1Presenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
@@ -63,5 +73,8 @@ void FrontendApplicationBase::gotoScreen1ScreenSlideTransitionEast()
 void FrontendApplicationBase::gotoScreen1ScreenSlideTransitionEastImpl()
 {
     makeTransition<Screen1View, Screen1Presenter, SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+=======
+    makeTransition<MainView, MainPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+>>>>>>> NewHal
 }
 
