@@ -11,15 +11,8 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
 
-<<<<<<< HEAD
-#include <gui/screen2_screen/Screen2View.hpp>
-#include <gui/screen2_screen/Screen2Presenter.hpp>
-#include <gui/screen1_screen/Screen1View.hpp>
-#include <gui/screen1_screen/Screen1Presenter.hpp>
-=======
 #include <gui/main_screen/MainView.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
->>>>>>> NewHal
 
 
 /**
@@ -42,14 +35,8 @@ public:
      * A list of all view types. Must end with meta::Nil.
      * @note All view types used in the application MUST be added to this list!
      */
-<<<<<<< HEAD
-    typedef meta::TypeList< Screen2View,
-            meta::TypeList< Screen1View,
-            meta::Nil >
-=======
     typedef meta::TypeList< MainView,
             meta::Nil
->>>>>>> NewHal
             > GeneratedViewTypes;
 
     /**
@@ -61,14 +48,8 @@ public:
      * A list of all presenter types. Must end with meta::Nil.
      * @note All presenter types used in the application MUST be added to this list!
      */
-<<<<<<< HEAD
-    typedef meta::TypeList< Screen2Presenter,
-            meta::TypeList< Screen1Presenter,
-            meta::Nil >
-=======
     typedef meta::TypeList< MainPresenter,
             meta::Nil
->>>>>>> NewHal
             > GeneratedPresenterTypes;
 
     /**
@@ -81,13 +62,7 @@ public:
      * @note All transition types used in the application MUST be added to this list!
      */
     typedef meta::TypeList< NoTransition,
-<<<<<<< HEAD
-            meta::TypeList< SlideTransition<EAST>,
-            meta::TypeList< SlideTransition<WEST>,
-            meta::Nil > >
-=======
             meta::Nil
->>>>>>> NewHal
             > GeneratedTransitionTypes;
 
     /**

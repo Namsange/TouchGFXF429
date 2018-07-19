@@ -28,6 +28,8 @@ MDK-ARM/DebugConfig/
 MDK-ARM/JlinkLog.txt
 MDK-ARM/*.lst
 
+# TouchGFX
+
 target/Keil/**/*.o
 target/Keil/**/*.d
 target/Keil/**/*.crf
@@ -39,11 +41,13 @@ target/Keil/**/*.dep
 target/Keil/**/*.hex
 target/Keil/**/*.lst
 target/Keil/JlinkLog.txt
+
+touchgfx/lib/sdl2/win32/*.lib
+touchgfx/lib/sdl2/win32/*.dll
+touchgfx/lib/win/msvs/*.lib
+
 # other
 
 *.a
 *.out
 build/
-touchgfx/lib/sdl2/win32/*.lib
-touchgfx/lib/sdl2/win32/*.dll
-touchgfx/lib/win/msvs/*.lib
